@@ -19,6 +19,8 @@ func main() {
 
 	consumer.Subscribe("notification-topic", nil)
 
+	defer consumer.Close()
+
 	for {
 		msg, err := consumer.ReadMessage(-1)
 		if err == nil {
@@ -28,6 +30,4 @@ func main() {
 			fmt.Printf("Consumer error: %v (%v)\n", err, msg)
 		}
 	}
-
-	consumer.Close()
 }
